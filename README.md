@@ -2,20 +2,20 @@ Lane detection using opencv
 
 Pipeline architecture:
 
-1] Load video.
+    1] Load video.
 
-2] Extract the region of interest.
+    2] Extract the region of interest.
 
-3] Color masking. 
+    3] Color masking. 
 
-4] Apply Canny edge detection.
-    -Convert the image to grey scale.
-    -Apply Gaussian smoothing to remove any noise.
-    -Perform Canny edge detection.
-    
-5] Apply Hough transform.
+    4] Apply Canny edge detection.
+        -Convert the image to grey scale.
+        -Apply Gaussian smoothing to remove any noise.
+        -Perform Canny edge detection.
 
-6] Average and extrapolating the lane lines.
+    5] Apply Hough transform.
+
+    6] Average and extrapolating the lane lines.
 
 
 Extracting the region of interest:- 
