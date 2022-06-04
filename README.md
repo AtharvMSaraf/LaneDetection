@@ -19,7 +19,6 @@ Pipeline architecture:
 
 
 Extracting the region of interest:- 
-
   Since out goal is so specific as to detect the lanes in the given camera feed, the region on which we do the further processing should also be
   confined. Camera projects a 3D world to a 2D plane, while doing so the parallel lines converge at a vanishing point on the 2D plane. Similarly 
   the the lanes being parallel get narrow as we move up the the image. They usually lie in a trapezoidal zone with side closer to car being broad
@@ -31,7 +30,6 @@ Extracting the region of interest:-
   
   
 Color Masking:-
-
   Once we have got our region of interest we the move to extracting just the lanes out of them. The lanes are usually of two colors yellow and 
   white. There are different color formats used to represent an image, each having its own characteristic. I played around with 3 of them to see 
   which one of them helps me segregate lanes out of image the most. Color schemes that I tried were RGB, HSV, HLS and I used the HLS color space,
@@ -49,7 +47,6 @@ discarded. This threshold values where decided by experimentation.
 
 
 Hough Transform:- 
-
   Hough transform, transforms the coordinate space into parametric space. In case of line it uses the normal line representation for mapping it 
   into the parametric space using the equation ρ = x cos(θ) + y sin(θ) where ρ is the length of the normal line and θ is the angle between the 
   normal line and the x axis. Cv2's HoughLinesP makes it easy to to extract lines from the image, but these are line formed using only the edges,
@@ -58,7 +55,6 @@ Hough Transform:-
   
   
 Average and extrapolating the lane lines:- 
-
   Given all the lines detected by the hough transform how do we segregate the left lane and right lane lines? The answer lines in the slope, 
   since the lane seems to be converging to a point, the line representing the left lane would have a negative slope whereas the right lane line 
   would have a positive slope. We thus find slope and length for each detected line ( hough return the end coordinates). We save this sloped and 
