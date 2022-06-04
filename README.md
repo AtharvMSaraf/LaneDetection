@@ -63,9 +63,18 @@ Average and extrapolating the lane lines:-
   challenge was extracting the x1,x2 coordinates. This could be done using the equation of line. We the finally plot the lines indicating the 
   lanes.
 
-This is a trivial scenario taken into consideration, it cannot handle the curvature of the road which would be the challenge for next code.
+This is a trivial scenario taken into consideration, it cannot handle the curvature of the road which would be the challenge for next code. The reason what curvatuture is not taken into consideration is,from the perspective of the camera mounted on a car, the lane lines make a trapezoid-like shape. We can’t properly calculate the radius of curvature of the lane because, from the camera’s perspective, the lane width appears to decrease the farther away you get from the car. Solution to which is to take Bird's view of the region of interest. 
 
-The pipeline for which would be:-
+    The pipeline for which would be:-
 
-Detection of lane pixel invariant to external factors:-
-    
+        1] Detection of lane pixel invariant to external factors:-
+            -Convert the video frame from BGR (blue, green, red) color space to HLS (hue, saturation, lightness).
+            -Perform Sobel edge detection on the L (lightness) channel of the image to detect sharp discontinuities in the pixel intensities
+            along the x and y axis of the video frame. 
+            -Perform binary thresholding on the S (saturation) channel of the video frame
+            -Perform binary thresholding on the R (red) channel of the original BGR video frame. 
+
+        2] Apply Perspective Transformation to Get a Bird’s Eye View. 
+        3] Identify Lane Line Pixels. 
+        4] Overlay Lane Lines on Original Image. 
+        5] Calculate Lane Line Curvature (still figuring out the maths behind this)
